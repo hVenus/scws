@@ -172,6 +172,54 @@ rules.ini 规则集
 项目主页：<http://www.xunsearch.com/scws> 我的邮箱：hightman2@yahoo.com.cn
 
 
+以下内容由hVenus添加
+-----------------
+
+windows下编译php_scws.dll，以php 5.6.21为例。
+
+1. 修改libscws/xdict.c
+将 23行#include <unistd.h>放到第24行之后。如下所示：
+> \#ifndef WIN32
+> \#include <unistd.h>
+> \#    include <sys/param.h>
+> \#endif
+
+2. 新建libscws/version.h文件
+内容：
+>\#define SCWS_VERSION	"1.2.3"
+>\#define SCWS_BUGREPORT	"scws"
+
+3. 参照 https://wiki.php.net/internals/windows/stepbystepbuild 这篇文章创建编译环境。
+
+可以自己编译出一个php来，不过这里不需要。只是为了让它把环境整好，不然各种报错。
+
+4. 将上面修改过的scws程序目录，放到phpdev/vc11/x86/下。
+
+即，phpdev/vc11/x86下有
+
+> deps
+> php-5.6.21-src
+> scws
+
+这三个目录。
+
+5. 用vs 2012 打开scws/win32下的工程文件。
+
+转换成2012的格式。
+
+6. 修改scws项目的属性。libscws的可以不改。
+
+从Release_PHP54复制一份配置，然后修改附加文件附加库的地址，改成../php-5.6.21-src 这种形式的。
+
+7. 下载 http://gnuwin32.sourceforge.net/packages/zlib.htm 里的 Developer files
+
+解压出来，然后在scws的配置项里添加附加目录和附加库的位置。
+
+8. vs2012里选release，编译。
+
+完成。
+
+
 [1]: http://www.xunsearch.com/scws
 [2]: http://www.php.net
 [3]: http://www.cygwin.com
