@@ -187,7 +187,7 @@ windows下编译php_scws.dll，以php 5.6.21为例。
 2. 新建libscws/version.h文件
 内容：
 >\#define SCWS_VERSION	"1.2.3"
->\#define SCWS_BUGREPORT	"scws"
+>\#define SCWS_BUGREPORT	"http://www.xunsearch.com/scws"
 
 3. 参照 https://wiki.php.net/internals/windows/stepbystepbuild 这篇文章创建编译环境。
 
